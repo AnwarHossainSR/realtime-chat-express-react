@@ -9,7 +9,7 @@ import "./chat.css";
 
 let socket;
 
-const ENDPOINT = "https://demo-cchat.herokuapp.com/";
+const ENDPOINT = "http://localhost:4000";
 
 const Chat = () => {
   const [id, setid] = useState("");
@@ -21,7 +21,6 @@ const Chat = () => {
     document.getElementById("chatInput").value = "";
   };
 
-  console.log(messages);
   useEffect(() => {
     socket = socketIo(ENDPOINT, { transports: ["websocket"] });
 
@@ -50,7 +49,7 @@ const Chat = () => {
       socket.emit("disconnect");
       socket.off();
     };
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     socket.on("sendMessage", (data) => {
